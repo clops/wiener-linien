@@ -1,6 +1,28 @@
 <?
-	setlocale(LC_ALL, 'en_US.UTF16');
+	/***
+	 *
+	 * Simple Renderer of a JSON File from the Wiener Linien CSV Files
+	 * The output will be cached and recreated only when any of the
+	 * original files is changed.
+	 *
+	 * Hail procedural programming :D
+	 *
+	 * @author  Alexey Kulikov <me@clops.at>
+	 * @since   05.10.2013
+	 *
+	 */
 
+	ignore_user_abort(true);                // run to the end mon!
+	ini_set('max_execution_time','180');    // 5 minutes
+	ini_set('memory_limit','256M');         // 256 MB
+
+	/***
+	 * Reads CSV Data line by line and put it into an assoc array
+	 *
+	 * @param        $filename
+	 * @param string $delimiter
+	 * @return array
+	 */
 	function readCSVDataFromFile($filename, $delimiter=';') {
 		if(!file_exists($filename) || !is_readable($filename))
 			return FALSE;
@@ -27,15 +49,11 @@
 		return $data;
 	}
 
-
-	$data = file_get_contents('wienerlinien-ogd-haltestellen.csv');
-
-
 	$haltestellen = readCSVDataFromFile('wienerlinien-ogd-haltestellen.csv');
 	$linien       = readCSVDataFromFile('wienerlinien-ogd-linien.csv');
 	$steige       = readCSVDataFromFile('wienerlinien-ogd-steige.csv');
 
-	echo '<pre>';
+	// Parse all the data into one array that makes sense
 	foreach($steige as $steig){
 		if(
 			isset($steig['FK_HALTESTELLEN_ID']) &&
@@ -60,14 +78,18 @@
 				'STEIG_WGS84_LON'   => (isset($steig['STEIG_WGS84_LON'])?$steig['STEIG_WGS84_LON']:'')
 			);
 
+			if(!isset($haltestellen[$steig['FK_HALTESTELLEN_ID']]['LINES'])) {
+				$haltestellen[$steig['FK_HALTESTELLEN_ID']]['LINES'] = array();
+			}
+
 			//set cache data
-			if(isset($linie['BEZEICHNUNG'])) {
-				$haltestellen[$steig['FK_HALTESTELLEN_ID']]['LINES'][$linie['BEZEICHNUNG']] = $linie['BEZEICHNUNG'];
+			if( isset($linie['BEZEICHNUNG']) and !in_array($linie['BEZEICHNUNG'], $haltestellen[$steig['FK_HALTESTELLEN_ID']]['LINES']) ) {
+				$haltestellen[$steig['FK_HALTESTELLEN_ID']]['LINES'][] = $linie['BEZEICHNUNG'];
 			}
 
 		}
 	}
 
-	echo '<pre>';
-	print_r($haltestellen);
+	//now encode the array to a json string and send it to a file
+	file_put_contents('cache/current.json', json_encode($haltestellen));
 ?>
