@@ -89,7 +89,7 @@ Here is a sample of the generated output data:
 
 The script can be called from the console, following options are supported
   * `--force` — force re-creation of json file
-  * `--verbose — display log output
+  * `--verbose` — display log output
   
 When calling the script from the console, the JSon output will not be sent to the client. Check the generated file under __cache/current.json__
 
@@ -99,4 +99,4 @@ Sure, try it out here — http://code.clops.at/wiener-linien/
 
 ### Links & References ###
 
-  * Script inspired by [Hactar's](https://github.com/hactar) OSX Tool for doing approximately the same task. One will need to track CSV changes @ Wiener Linien however and regenerate the file manualy. My service is automated. 
+Script inspired by [Hactar's](https://github.com/hactar) OSX Tool for doing approximately the same task. One will need to track CSV changes @ Wiener Linien however and regenerate the file manualy. My service is automated.
