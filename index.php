@@ -214,7 +214,7 @@
 	/**
 	 * The algorithm is very simple:
 	 *
-	 * Is there no local JSON File?
+	 * Is there a local JSON File?
 	 *   NO -->  create it
 	 *   YES --> get creation timestamp of json file,
 	 *           get last modified timestamps from remote files
