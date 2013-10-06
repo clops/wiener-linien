@@ -5,15 +5,15 @@ Server-side CSV Data parser which creates an always current combined-data JSON F
 
 ### Preamble ###
 
-The Wiener Linien (Vienna Public Transport Company) is providing real-time departure data via its API. However, making use of this data required the use of several data sources as the data is provided for different Platforms and not Stations (makes sense).
+The Wiener Linien (Vienna Public Transport Company) is providing real-time departure data via its API. However, making use of this data requires the use of several data sources as the data is provided for different Platforms and not Stations (makes sense).
 
 However, the end users are usually interested in Station data first, making a reverse lookup of the data necessary and rather uncomfortable for the developers working with the API.
 
-The Wiener Linien provide a dump of its lookup tables in form of three separate CSV files. One for the stations, one for the transport lines and platforms table linking the first two. In short -- lots of overhead work to do for anyone wishing to play with the API.
+The Wiener Linien provide a dump of its lookup tables in form of three separate CSV files. One for the stations, one for the transport lines and one for the platforms table linking the first two. In short — lots of overhead work to do for anyone wishing to play with the API.
 
 ### What does this tool do? ###
 
-This script generates a combined JSON file from the remote Wiener Linien data which is easy to query and use inside your applicate. The script is content-change aware, i.e. it will regenerate the JSON file once the remove CSV data changes (and it happens every once in a while as stations get renamed or changed).
+This script generates a combined JSON file from the remote Wiener Linien data which is easy to query and use inside your application. The script is content-change aware, i.e. it will regenerate the JSON file once the remote CSV data changes (and it happens every once in a while as stations get renamed or changed).
 
 Here is a sample of the generated output data:
 ```json
