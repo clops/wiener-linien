@@ -218,7 +218,7 @@
 	 *   NO -->  create it
 	 *   YES --> get creation timestamp of json file,
 	 *           get last modified timestamps from remote files
-	 *           compare, if remote is more than 1 hour older
+	 *           compare, if remote is older than the local
 	 *           then guess what... create the local json file
 	 *
 	 * In case not called from the console send the local json
