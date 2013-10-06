@@ -163,7 +163,7 @@
 
 		//write data to a new json file and do an atomic replace to make sure there is no loss of service
 		$newFileName = tempnam('cache', 'preparing_');
-		file_put_contents($newFileName, json_encode($haltestellen));
+		file_put_contents($newFileName, json_encode($haltestellen[214460106]));
 		rename($newFileName, LOCAL_FILE);
 		chmod(LOCAL_FILE, 0644);
 		_log( 'Done!' );
