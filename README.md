@@ -1,7 +1,7 @@
 Wiener Linien CSV Data Parser
 =============================
 
-CSV Data parser which creates a combined-data JSON File
+Server-side CSV Data parser which creates an always current combined-data JSON File
 
 ### Preamble ###
 
