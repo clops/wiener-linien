@@ -30,23 +30,24 @@
 	#### INIT ####
 	//from the console ths script has less output
 	$isCLI = ( php_sapi_name() == 'cli' );
+	$verboseOutput       = false;
+	$forceRegenerateFile = false;
+
 	if($isCLI) {
 		$options = getopt( 'vf', array('verbose','force') );
 
 		//debug output marker
 		if(isset($options['v']) || isset($options['verbose'])) {
-			define('VERBOSE', true);
-		} else {
-			define('VERBOSE', false);
+			$verboseOutput = true;
 		}
 
 		//force regenerate file marker
 		if(isset($options['f']) || isset($options['force'])) {
 			$forceRegenerateFile = true;
-		} else {
-			$forceRegenerateFile = false;
 		}
 	}
+
+	define('VERBOSE', $verboseOutput);
 
 	#### METHODS & STUFF ####
 	#
