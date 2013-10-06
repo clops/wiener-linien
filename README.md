@@ -85,7 +85,7 @@ Here is a sample of the generated output data:
 
   * Upload the script to your server to a web-accessible directory
   * Chmod 777 the `cache` folder
-  * Call the script either from a web browser, it will generate the JSon file and send it to the client.
+  * Call the script either from a web browser or a remote client, it will generate the JSon file and send it to the client.
 
 The script can be called from the console, following options are supported
   * `--force` — force re-creation of json file
