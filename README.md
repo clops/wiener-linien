@@ -91,7 +91,7 @@ The script can be called from the console, following options are supported
   * `--force` — force re-creation of json file
   * `--verbose` — display log output
   
-When calling the script from the console, the JSon output will not be sent to the client. Check the generated file under __cache/current.json__
+When calling the script from the console, the JSon output will not be sent to the client. Check the generated file under `cache/current.json`
 
 ### Any working examples? ###
 
