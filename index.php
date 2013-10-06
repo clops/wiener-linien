@@ -16,7 +16,7 @@
 	#
 	ignore_user_abort(true);                // run to the end mon!
 	ini_set('max_execution_time','600');    // 10 minutes
-	ini_set('memory_limit','32M');
+	ini_set('memory_limit','64M');
 
 
 	#### DATA LOCATION AND OTHER SETUP ####
@@ -68,15 +68,18 @@
 	 * @return array
 	 */
 	function _readCSVDataFromFile($filename, $delimiter=';') {
-		_log( 'Attempring to read file "'.$filename.'"' );
+		$tempFileName = tempnam('cache', 'remote_');
+		_log( 'Fetch remote file "'.$filename.'" to local cache file "'.$tempFileName.'"' );
 
-		if(!file_exists($filename) || !is_readable($filename)) {
+		$data = file_get_contents($filename);
+		file_put_contents($tempFileName, $data);
+
+		_log( 'Attempring to read file "'.$tempFileName.'"' );
+
+		if(!file_exists($tempFileName) || !is_readable($tempFileName)) {
 			_log( 'Failed! File does not exist or is not readable' );
 			return FALSE;
 		}
-
-		//Set the encoding to UTF-8, so when reading files it ignores the BOM
-		//mb_internal_encoding('UTF-8');
 
 		$header = NULL;
 		$data = array();
@@ -96,6 +99,7 @@
 		}
 
 		_log( 'Done!' );
+		unlink($tempFileName);
 		return $data;
 	}
 
@@ -160,8 +164,7 @@
 		$newFileName = tempnam('cache', 'preparing_');
 		file_put_contents($newFileName, json_encode($haltestellen));
 		rename($newFileName, LOCAL_FILE);
-		unlink($newFileName);
-
+		chmod(LOCAL_FILE, 0644);
 		_log( 'Done!' );
 
 		return true;
