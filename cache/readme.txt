@@ -1,0 +1,1 @@
+Chmod 777 this folder
