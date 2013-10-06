@@ -95,7 +95,7 @@ When calling the script from the console, the JSon output will not be sent to th
 
 ### Any working examples? ###
 
-Sure, try it out here — http://code.clops.at/wiener-linien/
+Sure, try it out here — http://code.clops.at/wiener-linien/ (approx 1.7 Mb Download)
 
 ### Links & References ###
 
